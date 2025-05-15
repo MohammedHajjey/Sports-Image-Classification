@@ -1,0 +1,17 @@
+# Core Machine Learning
+tensorflow==2.12.0
+numpy
+pillow
+
+# Data Loading & Visualization
+matplotlib
+seaborn
+
+# Scikit-learn for evaluation
+scikit-learn
+
+# Web App Interface
+streamlit
+
+# Desktop GUI (built-in tkinter)
+# No installation needed for tkinter – included with Python
