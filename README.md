@@ -4,6 +4,8 @@
 
 This project focuses on building a deep learning-based image classification system using a **Convolutional Neural Network (CNN)** to recognize and predict **100 different sport categories**. The model is trained on a labeled dataset of sports images and optimized using techniques such as data augmentation, dropout, and batch normalization to improve generalization. Once trained, the model is deployed in two interactive environments: a Streamlit-based web application and a Tkinter-based desktop GUI. Users can upload an image through either interface and receive the predicted sport label along with the confidence score. The system is evaluated using standard metrics including Accuracy, F1-Score, and Confusion Matrix visualization.
 
+#Dataset link
+https://www.kaggle.com/datasets/gpiosenka/sports-classification
 
 - A **training script** using TensorFlow/Keras and data generators
 - A **Streamlit web interface**
