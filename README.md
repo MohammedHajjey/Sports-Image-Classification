@@ -26,6 +26,11 @@ This project focuses on building a deep learning-based image classification syst
 ```
 
 ##  Dependencies
+#Download Dataset
+import kagglehub
+
+# Download latest version
+path = kagglehub.dataset_download("gpiosenka/sports-classification")
 
 Install required packages: using
 requirements.txt
