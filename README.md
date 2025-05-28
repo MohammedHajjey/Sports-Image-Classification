@@ -68,6 +68,8 @@ python train_model_and_evaluate.py
 ---
 
 ## Web Interface (Streamlit)
+#Sample
+![Image](https://github.com/user-attachments/assets/2ae09d45-360a-4a44-8d42-f3d13792e2de)
 
 To run the web app, use:
 
@@ -89,6 +91,8 @@ streamlit run interface-streamlit.py
 ---
 
 ## Desktop GUI (Tkinter)
+#Sample
+![Image](https://github.com/user-attachments/assets/4d0cf764-afcd-4ddb-89f8-447a63f65a32)
 
 To launch the desktop app, run:
 
