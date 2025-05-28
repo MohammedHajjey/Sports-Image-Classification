@@ -7,21 +7,21 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import os
 
-# === Load trained model ===
+# Load trained model 
 model_path = 'best_sports_model.keras'
 model = load_model(model_path)
 
-# === Class names ===
+# Class names
 class_names = sorted(os.listdir(
     r'C:/Users/User/Desktop/Universty Document/term8/Bulut-bilişim-Yapayzeka/Sports-Image-Classification/train'))
 
-# === Image settings ===
+# Image settings 
 IMAGE_SIZE = (350, 350)
 
-# === Background image path ===
+# Background image path 
 BACKGROUND_PATH = r'C:/Users/User/Desktop/Universty Document/term8/Bulut-bilişim-Yapayzeka/Sports-Image-Classification/background.webp'
 
-# === Main GUI Window (Fullscreen) ===
+# Main GUI Window (Fullscreen) 
 root = tk.Tk()
 root.title("Sports Image Classifier")
 root.state("zoomed")  # Fullscreen for Windows
@@ -29,7 +29,7 @@ root.state("zoomed")  # Fullscreen for Windows
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
-# === Try to load background image ===
+# Try to load background image 
 try:
     bg_img = Image.open(BACKGROUND_PATH)
     bg_img = bg_img.resize((screen_width, screen_height), Image.Resampling.LANCZOS)
@@ -43,11 +43,11 @@ except Exception as e:
     bg_label = tk.Label(root, bg="lightgray")
     bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-# === Image Display Panel ===
+# Image Display Panel 
 image_panel = tk.Label(root, bg="white", bd=2, relief="ridge")
 image_panel.place(x=screen_width//2 - 175, y=120, width=350, height=350)
 
-# === Result Display Frame ===
+# Result Display Frame 
 result_frame = tk.Frame(root, bg="white", bd=2, relief="ridge")
 result_frame.place(x=screen_width//2 - 150, y=500, width=300, height=100)
 
@@ -57,7 +57,7 @@ result_title.pack(pady=5)
 result_label = tk.Label(result_frame, text="", font=("Arial", 14), bg="white", wraplength=280)
 result_label.pack()
 
-# === Prediction Function ===
+# Prediction Function 
 def classify_image(file_path):
     try:
         img = image.load_img(file_path, target_size=IMAGE_SIZE)
@@ -72,7 +72,7 @@ def classify_image(file_path):
     except Exception as err:
         result_label.config(text=f"Error in prediction: {err}")
 
-# === Upload and Display Image ===
+# Upload and Display Image 
 def upload_image():
     file_path = filedialog.askopenfilename(
         filetypes=[("Image Files", "*.jpg *.jpeg *.png *.bmp *.webp")]
@@ -88,7 +88,7 @@ def upload_image():
         except Exception as e:
             result_label.config(text=f"Image error: {e}")
 
-# === Styled Upload Button ===
+# Styled Upload Button 
 style_frame = tk.Frame(root, bg="#ffffff")
 style_frame.place(x=screen_width//2 - 100, y=650)
 
@@ -107,5 +107,4 @@ upload_btn = tk.Button(style_frame,
                        cursor="hand2")
 upload_btn.pack()
 
-# === Run the GUI ===
 root.mainloop()
