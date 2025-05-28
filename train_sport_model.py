@@ -12,18 +12,18 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
 
-# === Absolute Path Base Directory ===
+# Absolute Path Base Directory 
 BASE_DIR = r'C:/Users/User/Desktop/Universty Document/term8/Bulut-bilişim-Yapayzeka/Sports-Image-Classification/'
 TRAIN_DIR = os.path.join(BASE_DIR, 'train')
 VAL_DIR = os.path.join(BASE_DIR, 'validation')
 TEST_DIR = os.path.join(BASE_DIR, 'test')
 
-# === Image & Batch Settings ===
+# Image & Batch Settings 
 IMAGE_SIZE = (224, 224)
 BATCH_SIZE = 32
 EPOCHS = 50
 
-# === Data Generators ===
+# Data Generators 
 train_datagen = ImageDataGenerator(
     rescale=1./255,
     rotation_range=20,
@@ -62,7 +62,7 @@ test_generator = test_val_datagen.flow_from_directory(
 
 class_names = list(train_generator.class_indices.keys())
 
-# === Build CNN Model ===
+# Build CNN Model 
 model = Sequential([
     Conv2D(32, (3, 3), activation='relu', padding='same', input_shape=(*IMAGE_SIZE, 3)),
     BatchNormalization(),
@@ -103,12 +103,12 @@ model.compile(optimizer=Adam(learning_rate=0.001),
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
-# === Callbacks ===
+#  Callbacks 
 early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=3, min_lr=1e-5)
 checkpoint = ModelCheckpoint('best_sports_model.keras', monitor='val_accuracy', save_best_only=True, verbose=1)
 
-# === Train Model ===
+# Train Model 
 history = model.fit(
     train_generator,
     validation_data=validation_generator,
@@ -116,20 +116,20 @@ history = model.fit(
     callbacks=[early_stop, reduce_lr, checkpoint]
 )
 
-# === Evaluate on Test Data ===
+# Evaluate on Test Data 
 model = load_model('best_sports_model.keras')
 test_generator.reset()
 y_pred = np.argmax(model.predict(test_generator), axis=1)
 y_true = test_generator.classes
 
-# === Metrics ===
+# Metrics 
 acc = accuracy_score(y_true, y_pred)
 f1 = f1_score(y_true, y_pred, average='weighted')
 print("\nClassification Report:\n", classification_report(y_true, y_pred, target_names=class_names))
 print(f"Test Accuracy: {acc:.2f}")
 print(f"Test F1 Score: {f1:.2f}")
 
-# === Confusion Matrix Plot ===
+# Confusion Matrix Plot
 cm = confusion_matrix(y_true, y_pred)
 plt.figure(figsize=(10, 8))
 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=class_names, yticklabels=class_names)
@@ -138,7 +138,7 @@ plt.xlabel("Predicted")
 plt.ylabel("True")
 plt.show()
 
-# === Training Curves ===
+# Training Curves 
 plt.figure(figsize=(14, 5))
 
 # Loss
