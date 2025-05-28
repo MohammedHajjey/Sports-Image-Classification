@@ -6,14 +6,14 @@ from tensorflow.keras.models import load_model
 import os
 import base64
 
-# === PAGE CONFIG ===
+# PAGE Config 
 st.set_page_config(
     page_title="Sports Image Classifier",
     page_icon="🏃",
     layout="wide"
 )
 
-# === BASE64 ENCODE BACKGROUND IMAGE ===
+# Encode Backround image ===
 def get_base64_bg(path):
     with open(path, "rb") as f:
         data = f.read()
@@ -22,7 +22,6 @@ def get_base64_bg(path):
 bg_path = r'C:/Users/User/Desktop/Universty Document/term8/Bulut-bilişim-Yapayzeka/Sports-Image-Classification/background.webp'
 bg_base64 = get_base64_bg(bg_path)
 
-# === BACKGROUND IMAGE & MODERN CSS ===
 st.markdown(f"""
     <style>
     body, .stApp {{
@@ -102,7 +101,7 @@ st.markdown(f"""
     </style>
 """, unsafe_allow_html=True)
 
-# === MODEL & CLASS NAMES ===
+# Model & Class Names
 @st.cache_resource
 def load_trained_model():
     model_path = 'best_sports_model.keras'
@@ -115,10 +114,8 @@ def get_class_names():
 model = load_trained_model()
 class_names = get_class_names()
 
-# === HEADER ===
 st.markdown('<div class="header-bar">🏃 Sports Image Classifier</div>', unsafe_allow_html=True)
 
-# === MAIN LAYOUT ===
 left, right = st.columns([1, 1], gap="large")
 
 with left:
@@ -126,7 +123,6 @@ with left:
     if 'uploaded_image' in st.session_state:
         uploaded_image = st.session_state['uploaded_image']
 
-    # ✅ LABEL BOŞ VERİLMEK YERİNE ANLAMLI BİR METİNLE GİZLENDİ
     upload_file = st.file_uploader(
         "Upload a sports image",
         type=["jpg", "jpeg", "png", "bmp", "webp"],
@@ -143,7 +139,7 @@ with left:
 
     start_btn_clicked = st.button("Start Prediction", key="upload_btn", help="Start prediction for the uploaded image")
     
-    # Butona stil ekle (custom class eklemek için JS hilesi)
+    # adding style into Botton 
     st.markdown("""
         <script>
         const btn = window.parent.document.querySelector('button[data-testid="baseButton-upload_btn"]');
